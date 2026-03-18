@@ -1,3 +1,0 @@
-2026-03-17 23:26:33.023770+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BLACKLISTED_MERCHANTS" not found (this database is empty); SQL statement:
-select bm1_0.id from blacklisted_merchants bm1_0 where bm1_0.merchant_id=? fetch first ? rows only [42104-240]
