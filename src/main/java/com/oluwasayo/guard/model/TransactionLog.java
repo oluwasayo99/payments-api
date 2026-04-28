@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "transaction_logs")
@@ -16,7 +18,7 @@ public class TransactionLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String cardNo;
 
@@ -30,6 +32,7 @@ public class TransactionLog {
 
     private Long executionTime;
 
-    @Column(insertable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
 }

@@ -4,11 +4,11 @@ services:
     container_name: payments-sqlserver
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+      MSSQL_SA_PASSWORD: "Sup3rS3cr3tPassword"
     ports:
-      - "1433:1433"
-    volumes:
-      - sqlserver_data:/var/opt/mssql
-
-volumes:
-  sqlserver_data:
+      - "1437:1433"
+#    volumes:
+#      - sqlserver_data:/var/opt/mssql
+#
+#volumes:
+#  sqlserver_data:

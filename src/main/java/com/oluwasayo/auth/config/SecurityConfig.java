@@ -56,13 +56,21 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        UserDetails user = User.builder()
+        UserDetails adminUser = User.builder()
                 .username("admin")
                 .password(encoder.encode("password"))
                 .roles("ADMIN")
                 .build();
-        System.out.println(user.toString());
-        return new InMemoryUserDetailsManager(user);
+
+        UserDetails normalUser = User.builder()
+                .username("sayo")
+                .password(encoder.encode("password"))
+                .roles("USER")
+                .build();
+
+        System.out.println("Admin User: " + adminUser.toString());
+        System.out.println("Normal User: " + normalUser.toString());
+        return new InMemoryUserDetailsManager(adminUser, normalUser);
     }
 
     @Bean
@@ -83,6 +91,7 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/admin/**").hasAllRoles("ADMIN")
                         .requestMatchers("/guard/ingest").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
