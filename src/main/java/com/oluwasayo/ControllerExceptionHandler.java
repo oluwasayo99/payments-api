@@ -21,4 +21,10 @@ public class ControllerExceptionHandler {
     public ErrorResponse unauthenticatedError(HttpClientErrorException.Unauthorized ex) {
         return ErrorResponse.create(ex, HttpStatus.UNAUTHORIZED,  ex.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    public ErrorResponse globalError(Exception ex) {
+        ex.printStackTrace();
+        return ErrorResponse.create(ex, HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
 }

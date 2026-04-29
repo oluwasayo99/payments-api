@@ -14,12 +14,13 @@ public class JwtUtil {
         this.jwtEncoder = jwtEncoder;
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String username, java.util.List<String> roles) {
         Instant now = Instant.now();
 
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .issuer("self")
                 .subject(username)
+                .claim("roles", roles)
                 .issuedAt(now)
                 .expiresAt(now.plus(15, ChronoUnit.MINUTES))
                 .build();

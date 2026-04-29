@@ -41,7 +41,7 @@ public class IngestionController {
 
         String status = "PENDING";
 
-        if (!rateLimiter.isAllowed(request.getMerchantId())) {
+        if (!rateLimiter.isAllowed(request.getIpAddress())) {
             status = "RATE_LIMITED";
             logger.logAttempt(request, status, System.currentTimeMillis() - start);
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
